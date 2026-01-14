@@ -56,7 +56,7 @@ const StatusChart = ({ data }: StatusChartProps) => {
     <div className="bg-white rounded-xl border border-gray-100 p-5">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Claims by Status</h3>
       <div className="h-64">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" aspect={1.5} minHeight={256}>
           <PieChart>
             <Pie
               data={chartData}

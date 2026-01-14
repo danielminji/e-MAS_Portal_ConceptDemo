@@ -29,7 +29,7 @@ const TopProvidersChart = ({ data }: TopProvidersChartProps) => {
     <div className="bg-white rounded-xl border border-gray-100 p-5">
       <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Providers by Cost</h3>
       <div className="h-64">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" aspect={1.8} minHeight={256}>
           <BarChart 
             data={data} 
             layout="vertical"
