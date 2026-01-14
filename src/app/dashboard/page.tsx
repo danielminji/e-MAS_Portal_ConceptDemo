@@ -179,13 +179,10 @@ export default function DashboardPage() {
 
         {/* Business Insights Section */}
         <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl p-6 text-white">
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4">
             <h3 className="text-lg font-semibold flex items-center gap-2">
               <span className="text-2xl">💡</span> Business Insights
             </h3>
-            <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full">
-              AI-Generated
-            </span>
           </div>
           <div className="grid sm:grid-cols-3 gap-4">
             <div className="bg-white/5 border border-white/10 rounded-lg p-4 hover:bg-white/10 transition-colors">

@@ -21,6 +21,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+              <strong className="text-white">Eximius Medical Administration Solutions Sdn Bhd (e-MAS)</strong><br />
               Medical claims processes redefined. Comprehensive healthcare administration solutions for corporates and providers.
             </p>
             <div className="flex gap-3">
@@ -83,18 +84,19 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-gray-400" />
                 <span className="text-sm">
-                  Level 10, Wisma UOA II<br />
-                  21 Jalan Pinang<br />
-                  50450 Kuala Lumpur
+                  Level 13 Wisma Perkeso<br />
+                  155, Jln Tun Razak, Kampung Baru<br />
+                  50300 Kuala Lumpur<br />
+                  Wilayah Persekutuan, Malaysia
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                <span className="text-sm">+603-2166 2233</span>
+                <span className="text-sm">+603-921 30103</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                <span className="text-sm">info@emastpa.com.my</span>
+                <Phone className="h-5 w-5 flex-shrink-0 text-gray-400" />
+                <span className="text-sm">+6018 788 3627 (WhatsApp)</span>
               </li>
             </ul>
           </div>
