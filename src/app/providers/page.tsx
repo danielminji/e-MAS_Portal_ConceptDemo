@@ -86,41 +86,91 @@ export default function ProvidersPage() {
     window.open(url, '_blank');
   };
 
+  // Provider counts
+  const providerCounts = useMemo(() => ({
+    hospitals: providers.filter(p => p.type === 'Hospital').length,
+    clinics: providers.filter(p => p.type === 'Clinic').length,
+    specialists: providers.filter(p => p.type === 'Specialist').length,
+    total: providers.length,
+    states: new Set(providers.map(p => p.state)).size,
+  }), [providers]);
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Page Header */}
+      {/* Page Header with Inline Stats */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Provider Network</h1>
-              <p className="text-gray-500 mt-1">
-                Find healthcare providers in our nationwide panel
-              </p>
+          <div className="flex flex-col gap-4">
+            {/* Title Row */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Provider Network</h1>
+                <p className="text-gray-500 mt-1">
+                  Find healthcare providers in our nationwide panel
+                </p>
+              </div>
+              <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md transition-colors ${
+                    viewMode === 'grid' 
+                      ? 'bg-white shadow-sm text-blue-600' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                  aria-label="Grid view"
+                >
+                  <Grid3X3 className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md transition-colors ${
+                    viewMode === 'list' 
+                      ? 'bg-white shadow-sm text-blue-600' 
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                  aria-label="List view"
+                >
+                  <List className="h-5 w-5" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'grid' 
-                    ? 'bg-white shadow-sm text-blue-600' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-                aria-label="Grid view"
+            
+            {/* Network Summary - Professional inline stats */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm border-t border-gray-100 pt-4">
+              <span className="text-gray-500">Network coverage:</span>
+              <span className="font-semibold text-gray-900">{providerCounts.total} providers</span>
+              <span className="text-gray-300">|</span>
+              <button 
+                onClick={() => setTypeFilter('Hospital')}
+                className={`hover:text-blue-600 transition-colors ${typeFilter === 'Hospital' ? 'text-blue-600 font-medium' : 'text-gray-600'}`}
               >
-                <Grid3X3 className="h-5 w-5" />
+                {providerCounts.hospitals} Hospitals
               </button>
-              <button
-                onClick={() => setViewMode('list')}
-                className={`p-2 rounded-md transition-colors ${
-                  viewMode === 'list' 
-                    ? 'bg-white shadow-sm text-blue-600' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-                aria-label="List view"
+              <button 
+                onClick={() => setTypeFilter('Clinic')}
+                className={`hover:text-blue-600 transition-colors ${typeFilter === 'Clinic' ? 'text-blue-600 font-medium' : 'text-gray-600'}`}
               >
-                <List className="h-5 w-5" />
+                {providerCounts.clinics} Clinics
               </button>
+              <button 
+                onClick={() => setTypeFilter('Specialist')}
+                className={`hover:text-blue-600 transition-colors ${typeFilter === 'Specialist' ? 'text-blue-600 font-medium' : 'text-gray-600'}`}
+              >
+                {providerCounts.specialists} Specialists
+              </button>
+              <span className="text-gray-300">|</span>
+              <span className="text-gray-600">{providerCounts.states} states</span>
+              {typeFilter !== 'all' && (
+                <>
+                  <span className="text-gray-300">|</span>
+                  <button 
+                    onClick={() => setTypeFilter('all')}
+                    className="text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    Clear filter
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -345,49 +395,6 @@ export default function ProvidersPage() {
             </Button>
           </div>
         )}
-
-        {/* Provider Stats */}
-        <div className="mt-8 grid sm:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl border border-gray-100 p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Building2 className="h-5 w-5 text-blue-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {providers.filter(p => p.type === 'Hospital').length}
-                </p>
-                <p className="text-sm text-gray-500">Hospitals</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-100 p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
-                <Heart className="h-5 w-5 text-teal-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {providers.filter(p => p.type === 'Clinic').length}
-                </p>
-                <p className="text-sm text-gray-500">Clinics</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl border border-gray-100 p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Stethoscope className="h-5 w-5 text-purple-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-900">
-                  {providers.filter(p => p.type === 'Specialist').length}
-                </p>
-                <p className="text-sm text-gray-500">Specialists</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
