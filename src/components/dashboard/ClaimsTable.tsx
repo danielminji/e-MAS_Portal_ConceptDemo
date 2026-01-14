@@ -2,9 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { Claim } from '@/types';
-import { Badge, Input, Select } from '@/components/ui';
+import { Badge, Input, Select, Button } from '@/components/ui';
 import { formatCurrency, formatDate } from '@/lib/utils';
-import { Search, ChevronUp, ChevronDown, Eye, FileText } from 'lucide-react';
+import { Search, ChevronUp, ChevronDown, Eye, FileText, Download } from 'lucide-react';
 
 interface ClaimsTableProps {
   claims: Claim[];
@@ -99,6 +99,30 @@ const ClaimsTable = ({ claims, onViewClaim }: ClaimsTableProps) => {
     );
   };
 
+  const exportToCSV = () => {
+    const headers = ['Claim ID', 'Patient', 'Provider', 'Amount (RM)', 'Status', 'Submitted Date', 'Description'];
+    const rows = filteredAndSortedClaims.map(claim => [
+      claim.id,
+      claim.patientName,
+      claim.provider,
+      claim.amount.toString(),
+      claim.status,
+      claim.submittedDate,
+      claim.description || ''
+    ]);
+    
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `claims_export_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+  };
+
   return (
     <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
       {/* Table Header */}
@@ -125,6 +149,10 @@ const ClaimsTable = ({ claims, onViewClaim }: ClaimsTableProps) => {
               }}
             />
           </div>
+          <Button variant="outline" onClick={exportToCSV} className="whitespace-nowrap">
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
         </div>
       </div>
 
@@ -247,11 +275,27 @@ const ClaimsTable = ({ claims, onViewClaim }: ClaimsTableProps) => {
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center">
                   <div className="flex flex-col items-center">
-                    <FileText className="h-12 w-12 text-gray-300 mb-3" />
-                    <p className="text-gray-500 font-medium">No claims found</p>
-                    <p className="text-sm text-gray-400 mt-1">
-                      Try adjusting your search or filter criteria
+                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                      <FileText className="h-8 w-8 text-gray-400" />
+                    </div>
+                    <p className="text-gray-700 font-medium text-lg">No claims match your criteria</p>
+                    <p className="text-sm text-gray-500 mt-2 max-w-sm">
+                      {search && statusFilter !== 'all' 
+                        ? `No results for "${search}" with status "${statusFilter}"`
+                        : search 
+                        ? `No results found for "${search}"`
+                        : statusFilter !== 'all'
+                        ? `No ${statusFilter.toLowerCase()} claims at this time`
+                        : 'Try adjusting your search or filter criteria'}
                     </p>
+                    {(search || statusFilter !== 'all') && (
+                      <button
+                        onClick={() => { setSearch(''); setStatusFilter('all'); }}
+                        className="mt-4 text-sm text-blue-600 hover:text-blue-700 font-medium"
+                      >
+                        Clear all filters
+                      </button>
+                    )}
                   </div>
                 </td>
               </tr>

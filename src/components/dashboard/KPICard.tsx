@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 
@@ -46,6 +49,34 @@ const colorSchemes = {
   },
 };
 
+// Animated counter hook
+const useAnimatedCounter = (endValue: number, duration: number = 1000) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      
+      // Easing function for smooth animation
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.floor(easeOutQuart * endValue));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [endValue, duration]);
+
+  return count;
+};
+
 const KPICard = ({ 
   title, 
   value, 
@@ -55,13 +86,31 @@ const KPICard = ({
   colorScheme = 'blue' 
 }: KPICardProps) => {
   const colors = colorSchemes[colorScheme];
+  
+  // Extract number from value for animation
+  const numericValue = parseFloat(value.replace(/[^0-9.]/g, ''));
+  const animatedValue = useAnimatedCounter(numericValue, 1200);
+  
+  // Format the animated value back to display format
+  const formatAnimatedValue = () => {
+    if (value.includes('RM')) {
+      return `RM ${animatedValue.toLocaleString()}`;
+    }
+    if (value.includes('%')) {
+      return `${animatedValue}%`;
+    }
+    if (value.includes(',') || numericValue >= 1000) {
+      return animatedValue.toLocaleString();
+    }
+    return animatedValue.toString();
+  };
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-5 hover:shadow-md transition-all duration-300 group">
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <p className="text-sm font-medium text-gray-500 mb-1">{title}</p>
-          <p className="text-2xl font-bold text-gray-900">{value}</p>
+          <p className="text-2xl font-bold text-gray-900 tabular-nums">{formatAnimatedValue()}</p>
           {subtitle && (
             <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
           )}
