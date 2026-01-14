@@ -55,8 +55,8 @@ const TrendChart = ({ data }: TrendChartProps) => {
           </div>
         </div>
       </div>
-      <div className="h-72">
-        <ResponsiveContainer width="100%" aspect={2} minHeight={288}>
+      <div style={{ width: '100%', height: 288 }}>
+        <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
             <defs>
               <linearGradient id="colorClaims" x1="0" y1="0" x2="0" y2="1">
