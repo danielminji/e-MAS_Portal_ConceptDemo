@@ -5,6 +5,12 @@ A modern, responsive healthcare administration portal demo built with Next.js 14
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss)
+![Deployed](https://img.shields.io/badge/Deployed-Vercel-black?style=flat-square&logo=vercel)
+
+## 🔗 Links
+
+- **Live Demo**: [https://e-mas-portal-concept-demo.vercel.app](https://e-mas-portal-concept-demo.vercel.app/)
+- **Repository**: [https://github.com/danielminji/e-MAS_Portal_ConceptDemo](https://github.com/danielminji/e-MAS_Portal_ConceptDemo.git)
 
 ## 🌟 Overview
 
@@ -18,35 +24,43 @@ This project simulates a real-world healthcare TPA portal that enables HR profes
 ## ✨ Features
 
 ### 🏠 Landing Page
-- Hero section with value proposition
+- Hero section with custom AI-assisted illustration
+- "How It Works" section with workflow visualization
 - Animated statistics and metrics
 - Service offerings showcase
 - Feature highlights with visual indicators
 - Call-to-action for demos
 
 ### 📊 Corporate Dashboard
-- **Real-time KPIs**: Total claims, approval rates, cost savings
+- **Real-time KPIs**: Total claims, approval rates, cost savings with animated counters
 - **Interactive Charts**: 
   - Claims trend analysis (30-day view)
   - Status distribution pie chart
   - Top providers by cost (horizontal bar)
-- **Claims Table**: Sortable, filterable with pagination
+- **Claims Table**: Sortable, filterable with pagination and CSV export
 - **Claim Details Modal**: Complete claim information view
-- **Business Insights**: AI-ready analytics section
+- **Business Insights**: Actionable analytics with categorized recommendations
+- **Skeleton Loading**: Professional loading states
 
 ### 🏥 Provider Finder
 - **Search**: Find providers by name, address, or services
 - **Filters**: Filter by type (Hospital/Clinic/Specialist) and location
 - **Dual Views**: Toggle between grid and list layouts
 - **Provider Cards**: Ratings, specialties, contact info, Google Maps integration
-- **Real-time Stats**: Provider count by category
+- **Inline Stats Bar**: Network coverage summary with clickable filters (professional pattern)
+- **Empty States**: Custom illustration for no-results scenarios
 
 ### 📬 Contact Page
 - **Form Validation**: Client-side validation with error messages
 - **Subject Categories**: General, Demo Request, Support, Partnership
-- **Contact Information**: Office address, phone, email, business hours
+- **Contact Information**: Official e-MAS office address, phone, WhatsApp
 - **FAQ Section**: Common questions answered
 - **Toast Notifications**: Success/error feedback
+
+### 🎨 Additional Features
+- **Disclaimer Banner**: Dismissible "Concept Demo" ribbon for transparency
+- **Responsive Design**: Mobile-first approach across all breakpoints
+- **Anonymized Data**: Professional mock data without real personal information
 
 ## 🛠️ Tech Stack
 
@@ -142,9 +156,14 @@ npm start
 
 ## 🚀 Deployment
 
-### Deploy to Vercel (Recommended)
+### Live Site
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
+The application is deployed and live at:
+**[https://e-mas-portal-concept-demo.vercel.app](https://e-mas-portal-concept-demo.vercel.app/)**
+
+### Deploy Your Own
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/danielminji/e-MAS_Portal_ConceptDemo)
 
 1. Push your code to GitHub
 2. Import the repository in Vercel
@@ -199,11 +218,17 @@ This project was built as a technical demonstration for the **Front-End Develope
 ## 🔜 Future Enhancements
 
 - [ ] Backend API integration
-- [ ] User authentication
+- [ ] User authentication with role switcher (Admin/Claims Officer/Provider)
 - [ ] PDF claim exports
-- [ ] Email notifications
+- [ ] Interactive map with Leaflet.js
 - [ ] Multi-language support (BM/EN)
-- [ ] Mobile app companion
+- [ ] Accessibility audit (WCAG compliance)
+- [ ] Unit tests with Jest/React Testing Library
+
+## 👤 Author
+
+**Daniel Hakim**  
+Front-End Developer Portfolio Project
 
 ## 📄 License
 
@@ -211,4 +236,4 @@ This is a demo project created for educational and demonstration purposes.
 
 ---
 
-Built for modern healthcare administration
+Built for modern healthcare administration • [View Live Demo](https://e-mas-portal-concept-demo.vercel.app/)
