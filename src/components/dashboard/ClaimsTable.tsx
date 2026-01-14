@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Image from 'next/image';
 import { Claim } from '@/types';
 import { Badge, Input, Select, Button } from '@/components/ui';
 import { formatCurrency, formatDate } from '@/lib/utils';
@@ -274,12 +275,17 @@ const ClaimsTable = ({ claims, onViewClaim }: ClaimsTableProps) => {
             ) : (
               <tr>
                 <td colSpan={7} className="px-4 py-12 text-center">
-                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                      <FileText className="h-8 w-8 text-gray-400" />
+                  <div className="flex flex-col items-center max-w-sm mx-auto">
+                    <div className="relative w-48 h-48 mb-4">
+                      <Image
+                        src="/images/empty-state-no-data.png"
+                        alt="No claims found - illustration of empty search results"
+                        fill
+                        className="object-contain opacity-90"
+                      />
                     </div>
                     <p className="text-gray-700 font-medium text-lg">No claims match your criteria</p>
-                    <p className="text-sm text-gray-500 mt-2 max-w-sm">
+                    <p className="text-sm text-gray-500 mt-2 text-center">
                       {search && statusFilter !== 'all' 
                         ? `No results for "${search}" with status "${statusFilter}"`
                         : search 

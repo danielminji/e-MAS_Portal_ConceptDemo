@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button, Card } from '@/components/ui';
 import { 
   ArrowRight, 
@@ -12,7 +13,10 @@ import {
   HeartPulse,
   CheckCircle,
   BarChart3,
-  Globe
+  Globe,
+  FileUp,
+  Search,
+  CreditCard
 } from 'lucide-react';
 
 // Services data
@@ -40,6 +44,34 @@ const services = [
     title: 'Claims Audit',
     description: 'Expert medical bill auditing to ensure accuracy, prevent fraud, and optimize healthcare spending.',
     color: 'bg-purple-500',
+  },
+];
+
+// How It Works steps
+const howItWorks = [
+  {
+    step: 1,
+    icon: FileUp,
+    title: 'Submit Claim',
+    description: 'Healthcare providers submit claims digitally through our secure portal with all required documentation.',
+  },
+  {
+    step: 2,
+    icon: Search,
+    title: 'Auto-Validation',
+    description: 'Our system automatically validates claims against policy rules and identifies any discrepancies.',
+  },
+  {
+    step: 3,
+    icon: CheckCircle,
+    title: 'Review & Approve',
+    description: 'Claims officers review flagged items while straightforward claims are auto-approved instantly.',
+  },
+  {
+    step: 4,
+    icon: CreditCard,
+    title: 'Settlement',
+    description: 'Approved claims are processed for payment with complete transparency and tracking.',
   },
 ];
 
@@ -128,57 +160,21 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Hero Visual - Dashboard Preview */}
+            {/* Hero Visual - Healthcare Platform Illustration */}
             <div className="relative hidden lg:block">
-              <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 p-6 shadow-2xl">
-                {/* Mini Dashboard Preview */}
-                <div className="space-y-4">
-                  {/* Header */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-teal-500 rounded-lg" />
-                      <div>
-                        <div className="h-3 w-24 bg-gray-600 rounded" />
-                        <div className="h-2 w-16 bg-gray-700 rounded mt-1" />
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-8 h-8 bg-gray-700 rounded-lg" />
-                      <div className="w-8 h-8 bg-gray-700 rounded-lg" />
-                    </div>
-                  </div>
-                  
-                  {/* KPI Cards Preview */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: 'Total Claims', value: '1,250', color: 'from-blue-500 to-blue-600' },
-                      { label: 'Approved', value: '74%', color: 'from-emerald-500 to-emerald-600' },
-                      { label: 'Savings', value: 'RM 150K', color: 'from-teal-500 to-teal-600' },
-                    ].map((kpi, i) => (
-                      <div key={i} className="bg-gray-700/50 rounded-lg p-3">
-                        <div className="text-xs text-gray-400 mb-1">{kpi.label}</div>
-                        <div className={`text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r ${kpi.color}`}>
-                          {kpi.value}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Chart Preview */}
-                  <div className="bg-gray-700/50 rounded-lg p-4 h-32 flex items-end justify-center gap-1">
-                    {[40, 65, 45, 80, 55, 70, 60, 85, 50, 75, 65, 90].map((h, i) => (
-                      <div 
-                        key={i}
-                        className="w-4 bg-gradient-to-t from-blue-500 to-teal-400 rounded-t"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl" />
-                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-teal-500/20 rounded-full blur-2xl" />
+              <div className="relative">
+                <Image
+                  src="/images/hero-healthcare-platform.png"
+                  alt="e-MAS Healthcare Management Platform - Unified dashboard showing claims analytics, provider network, and real-time processing"
+                  width={600}
+                  height={500}
+                  priority
+                  className="rounded-2xl shadow-2xl"
+                />
+                
+                {/* Floating accent elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/30 rounded-full blur-2xl" />
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-teal-500/30 rounded-full blur-2xl" />
               </div>
             </div>
           </div>
@@ -205,6 +201,81 @@ export default function HomePage() {
                 </Card>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-teal-50 border border-teal-200 rounded-full text-teal-700 text-sm mb-4">
+              <Clock className="h-4 w-4" />
+              Streamlined Process
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              How It Works
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              From submission to settlement — experience a seamless claims journey with full visibility at every step.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Workflow Illustration */}
+            <div className="relative order-2 lg:order-1">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/workflow-claims-process.png"
+                  alt="e-MAS Claims Processing Workflow - Visual representation of the end-to-end claims journey from submission through validation, approval, and settlement"
+                  width={600}
+                  height={450}
+                  className="w-full h-auto"
+                />
+              </div>
+              
+              {/* Decorative gradient */}
+              <div className="absolute -z-10 -bottom-8 -right-8 w-64 h-64 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full blur-3xl opacity-60" />
+            </div>
+
+            {/* Steps */}
+            <div className="order-1 lg:order-2">
+              <div className="space-y-6">
+                {howItWorks.map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div 
+                      key={index}
+                      className="flex gap-4 p-4 rounded-xl hover:bg-gray-50 transition-colors group"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="relative">
+                          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-teal-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Icon className="h-6 w-6 text-white" />
+                          </div>
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-white border-2 border-blue-500 rounded-full flex items-center justify-center text-xs font-bold text-blue-600">
+                            {item.step}
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
+                        <p className="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              
+              <div className="mt-8 flex gap-4">
+                <Link href="/dashboard">
+                  <Button className="group">
+                    See It In Action
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
